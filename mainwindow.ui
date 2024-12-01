@@ -115,6 +115,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
               <widget class="QPushButton" name="button_play">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>1</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>Play</string>
                </property>
@@ -122,6 +128,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="button_plus_one">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>1</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>+ 1</string>
                </property>
@@ -129,6 +141,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="button_plus_five">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>1</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>+ 5</string>
                </property>
@@ -138,6 +156,12 @@
               <widget class="QLineEdit" name="edit_frame_num">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>2</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
               </widget>
              </item>
@@ -201,7 +225,11 @@
          <number>4</number>
         </property>
         <item>
-         <widget class="VideoView" name="view_frame" native="true"/>
+         <widget class="VideoView" name="view_frame">
+          <property name="dragMode">
+           <enum>QGraphicsView::DragMode::ScrollHandDrag</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -214,9 +242,8 @@
  <customwidgets>
   <customwidget>
    <class>VideoView</class>
-   <extends>QWidget</extends>
+   <extends>QGraphicsView</extends>
    <header>videoview.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -2,11 +2,13 @@
 
 #include <opencv2/core/utils/logger.hpp>
 #include <opencv2/videoio.hpp>
+#include <opencv2/tracking.hpp>
 
 struct MainModel::MainModelImpl
 {
     cv::VideoCapture cap;
     cv::Mat frame;
+    cv::Ptr<cv::Tracker> tracker;
 };
 
 MainModel::MainModel()
@@ -53,10 +55,27 @@ int MainModel::frameNum() const
     return (int)impl->cap.get(cv::CAP_PROP_POS_FRAMES);
 }
 
-QImage MainModel::getFrame() const
+QPair<QImage, QRectF> MainModel::getFrame() const
 {
+    QRectF rect;
     if (impl->frame.empty())
-        return QImage();
+        return qMakePair(QImage(), rect);
+    if (impl->tracker)
+    {
+        cv::Rect cvrect;
+        impl->tracker->update(impl->frame, cvrect);
+        rect = QRectF(cvrect.x, cvrect.y, cvrect.width, cvrect.height);
+    }
     QImage img(impl->frame.data, impl->frame.size().width, impl->frame.size().height, impl->frame.step, QImage::Format_BGR888);
-    return img.copy();
+    return qMakePair(img.copy(), rect);
+}
+
+void MainModel::initTracking(const QRectF &rect)
+{
+    if (impl->tracker)
+    {
+        impl->tracker.release();
+    }
+    impl->tracker = cv::tracking::TrackerCSRT::create();
+    impl->tracker->init(impl->frame, cv::Rect(rect.x(), rect.y(),rect.width(), rect.height()));
 }

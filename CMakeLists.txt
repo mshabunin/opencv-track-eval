@@ -25,7 +25,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         model/mainmodel.h model/mainmodel.cpp
-        widgets/videoview.h widgets/videoview.cpp widgets/videoview.ui
+        widgets/videoview.h widgets/videoview.cpp
 
     )
 # Define target properties for Android with Qt 6 as:
@@ -47,7 +47,7 @@ else()
 endif()
 
 target_link_libraries(opencv-track-eval PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(opencv-track-eval PRIVATE opencv_core opencv_imgproc opencv_videoio)
+target_link_libraries(opencv-track-eval PRIVATE opencv_core opencv_imgproc opencv_videoio opencv_tracking)
 
 target_include_directories(opencv-track-eval PRIVATE "${CMAKE_CURRENT_LIST_DIR}/widgets")
 

@@ -9,6 +9,7 @@ MainWindow::MainWindow(MainModel & model_, QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->view_frame, SIGNAL(selectionChanged(QRectF)), this, SLOT(selectionChanged(QRectF)));
 }
 
 MainWindow::~MainWindow()
@@ -18,7 +19,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateFrame()
 {
-    ui->view_frame->updateFrame(QPixmap::fromImage(model.getFrame()));
+    QPair<QImage, QRectF> res = model.getFrame();
+    ui->view_frame->updateFrame(QPixmap::fromImage(res.first));
+    ui->view_frame->updateSelection(res.second);
     ui->edit_frame_num->setText(QString::number(model.frameNum()));
 }
 
@@ -33,6 +36,11 @@ void MainWindow::timerEvent(QTimerEvent * evt)
     {
         on_button_play_clicked();
     }
+}
+
+void MainWindow::selectionChanged(const QRectF &rect)
+{
+    model.initTracking(rect);
 }
 
 void MainWindow::on_button_choose_file_clicked()
@@ -103,11 +111,4 @@ void MainWindow::on_button_play_clicked()
     ui->button_play->setText((playing != 0) ? "Pause" : "Play");
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
-}
-
-void MainWindow::wheelEvent(QWheelEvent *event)
-{
-}
 

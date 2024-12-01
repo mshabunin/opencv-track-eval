@@ -12,7 +12,8 @@ public:
     void reset();
     bool seek(int num);
     int frameNum() const;
-    QImage getFrame() const;
+    QPair<QImage, QRectF> getFrame() const;
+    void initTracking(const QRectF & rect);
 private:
     struct MainModelImpl;
     MainModelImpl * impl;

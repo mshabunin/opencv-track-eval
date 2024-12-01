@@ -25,6 +25,8 @@ private:
     void timerEvent(QTimerEvent * evt) override;
 
 private slots:
+    void selectionChanged(const QRectF & rect);
+
     void on_button_choose_file_clicked();
     void on_edit_filename_textChanged(const QString &arg1);
     void on_button_load_clicked();
@@ -40,15 +42,5 @@ private:
     int playing; // timer id
     MainModel & model;
 
-    // QWidget interface
-protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override
-    {
-    }
-    void mouseMoveEvent(QMouseEvent *event) override
-    {
-    }
-    void wheelEvent(QWheelEvent *event) override;
 };
 #endif // MAINWINDOW_H

@@ -1,17 +1,13 @@
 #include "videoview.h"
-#include "ui_videoview.h"
 
 VideoView::VideoView(QWidget *parent)
-    : QWidget(parent), scene(new QGraphicsScene(this)), pixitem(nullptr)
-    , ui(new Ui::VideoView)
+    : QGraphicsView(parent), scene(new QGraphicsScene(this)), pixitem(nullptr), rectitem(nullptr)
 {
-    ui->setupUi(this);
-    ui->view_frame->setScene(scene);
+    this->setScene(scene);
 }
 
 VideoView::~VideoView()
 {
-    delete ui;
 }
 
 void VideoView::updateFrame(QPixmap img)
@@ -33,12 +29,12 @@ void VideoView::updateFrame(QPixmap img)
         if (img.isNull())
         {
             qDebug() << "view: reset";
-            ui->view_frame->setScene(nullptr);
+            this->setScene(nullptr);
             scene->clear();
             delete scene;
             scene = new QGraphicsScene(this);
             pixitem = nullptr;
-            ui->view_frame->setScene(scene);
+            this->setScene(scene);
         }
         else
         {
@@ -47,6 +43,86 @@ void VideoView::updateFrame(QPixmap img)
             pixitem->update();
             scene->update();
         }
+    }
+}
+
+QRectF VideoView::getSelection() const
+{
+    if (rectitem)
+    {
+        return rectitem->rect();
+    }
+    else
+    {
+        return QRectF();
+    }
+}
+
+void VideoView::updateSelection(const QRectF &sel)
+{
+    if (!rectitem)
+    {
+        rectitem = scene->addRect(sel);
+    }
+    else
+    {
+        rectitem->setRect(sel);
+    }
+}
+
+void VideoView::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::RightButton && pixitem)
+    {
+        if (rectitem)
+        {
+            scene->removeItem(rectitem);
+        }
+        initpt = mapToScene(event->pos());
+        QRectF rect = QRectF(initpt, QSizeF(1, 1));
+        rectitem = scene->addRect(rect, QPen(Qt::PenStyle::SolidLine), QBrush(Qt::BrushStyle::Dense7Pattern));
+    }
+    QGraphicsView::mousePressEvent(event);
+}
+
+void VideoView::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::RightButton)
+    {
+        if (rectitem)
+        {
+            rectitem->setRect(QRect::span(initpt.toPoint(), mapToScene(event->pos()).toPoint()));
+            emit selectionChanged(rectitem->rect());
+        }
+    }
+    QGraphicsView::mouseReleaseEvent(event);
+}
+
+void VideoView::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons().testFlag(Qt::RightButton))
+    {
+        if (rectitem)
+        {
+            rectitem->setRect(QRect::span(initpt.toPoint(), mapToScene(event->pos()).toPoint()));
+        }
+    }
+    QGraphicsView::mouseMoveEvent(event);
+}
+
+void VideoView::wheelEvent(QWheelEvent *event)
+{
+    if (event->modifiers() == Qt::ControlModifier)
+    {
+        const int degrees = event->angleDelta().y();
+        qDebug() << "view: wheel event : " << degrees << " | " << event->isEndEvent();
+        zoom += degrees > 0 ? 10 : -10;
+        zoom = std::clamp(zoom, 10, 300);
+        setTransform(QTransform::fromScale(zoom / 100., zoom / 100.));
+    }
+    else
+    {
+        QGraphicsView::wheelEvent(event);
     }
 }
 
