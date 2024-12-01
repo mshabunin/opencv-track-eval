@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormCSRT</class>
+ <widget class="QWidget" name="FormCSRT">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>222</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="cb_use_hog">
+     <property name="text">
+      <string>Use HOG</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="cb_use_segmentation">
+     <property name="text">
+      <string>Use segmentation</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="cb_use_color_names">
+     <property name="text">
+      <string>Use color names</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="cb_use_channel_weights">
+     <property name="text">
+      <string>Use channel weights</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="cb_use_gray">
+     <property name="text">
+      <string>Use gray</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="cb_use_rgb">
+     <property name="text">
+      <string>Use RGB</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Window function</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="cb_window_function">
+     <item>
+      <property name="text">
+       <string>hann</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>cheb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>kaiser</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Kaiser alpha</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QDoubleSpinBox" name="sb_kaiser_alpha"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Cheb attenuation</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QDoubleSpinBox" name="sb_cheb_attenuation"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Template size</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QDoubleSpinBox" name="sb_template_size"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="toolTip">
+      <string>Gaussian shaped labels sigma</string>
+     </property>
+     <property name="text">
+      <string>GSL sigma</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QDoubleSpinBox" name="sb_gsl_sigma"/>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>HOG orientations</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QDoubleSpinBox" name="sb_hog_orientations"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>HOG clip</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QDoubleSpinBox" name="sb_hog_clip"/>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Padding</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="QDoubleSpinBox" name="sb_padding"/>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Filter LR</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QDoubleSpinBox" name="sb_filter_lr"/>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Weights LR</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QDoubleSpinBox" name="sb_weights_lr"/>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="toolTip">
+      <string>Number of HOG channels used</string>
+     </property>
+     <property name="text">
+      <string>HOG channels</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="QSpinBox" name="sb_hog_channels"/>
+   </item>
+   <item row="14" column="0">
+    <widget class="QLabel" name="label_12">
+     <property name="text">
+      <string>ADMM iterations</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="QSpinBox" name="sb_admm_iterations"/>
+   </item>
+   <item row="15" column="0">
+    <widget class="QLabel" name="label_13">
+     <property name="text">
+      <string>Histogram bins</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1">
+    <widget class="QSpinBox" name="sb_histogram_bins"/>
+   </item>
+   <item row="16" column="0">
+    <widget class="QLabel" name="label_14">
+     <property name="text">
+      <string>Histogram LR</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1">
+    <widget class="QDoubleSpinBox" name="sb_histogram_lr"/>
+   </item>
+   <item row="17" column="0">
+    <widget class="QLabel" name="label_15">
+     <property name="text">
+      <string>Background ratio</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1">
+    <widget class="QSpinBox" name="sb_background_ratio"/>
+   </item>
+   <item row="18" column="0">
+    <widget class="QLabel" name="label_16">
+     <property name="text">
+      <string>Number of scales</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1">
+    <widget class="QSpinBox" name="sb_number_of_scales"/>
+   </item>
+   <item row="19" column="0">
+    <widget class="QLabel" name="label_17">
+     <property name="text">
+      <string>Scale sigma factor</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1">
+    <widget class="QDoubleSpinBox" name="sb_scale_sigma_factor"/>
+   </item>
+   <item row="20" column="0">
+    <widget class="QLabel" name="label_18">
+     <property name="text">
+      <string>Scale max area</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="1">
+    <widget class="QDoubleSpinBox" name="sb_scale_model_max_area"/>
+   </item>
+   <item row="21" column="0">
+    <widget class="QLabel" name="label_19">
+     <property name="text">
+      <string>Scale LR</string>
+     </property>
+    </widget>
+   </item>
+   <item row="21" column="1">
+    <widget class="QDoubleSpinBox" name="sb_scale_lr"/>
+   </item>
+   <item row="22" column="0">
+    <widget class="QLabel" name="label_20">
+     <property name="text">
+      <string>Scale step</string>
+     </property>
+    </widget>
+   </item>
+   <item row="22" column="1">
+    <widget class="QDoubleSpinBox" name="sb_scale_step"/>
+   </item>
+   <item row="23" column="0">
+    <widget class="QLabel" name="label_21">
+     <property name="text">
+      <string>PSR threshold</string>
+     </property>
+    </widget>
+   </item>
+   <item row="23" column="1">
+    <widget class="QDoubleSpinBox" name="sb_psr_threshold"/>
+   </item>
+   <item row="24" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

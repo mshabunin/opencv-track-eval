@@ -34,6 +34,7 @@ void VideoView::updateFrame(QPixmap img)
             delete scene;
             scene = new QGraphicsScene(this);
             pixitem = nullptr;
+            rectitem = nullptr;
             this->setScene(scene);
         }
         else

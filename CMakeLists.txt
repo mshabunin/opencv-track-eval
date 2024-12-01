@@ -26,6 +26,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         model/mainmodel.h model/mainmodel.cpp
         widgets/videoview.h widgets/videoview.cpp
+        widgets/formcsrt.h widgets/formcsrt.cpp widgets/formcsrt.ui
 
     )
 # Define target properties for Android with Qt 6 as:

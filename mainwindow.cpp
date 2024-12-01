@@ -40,7 +40,7 @@ void MainWindow::timerEvent(QTimerEvent * evt)
 
 void MainWindow::selectionChanged(const QRectF &rect)
 {
-    model.initTracking(rect);
+    model.initTrackingCSRT(rect, ui->form_csrt->getParams());
 }
 
 void MainWindow::on_button_choose_file_clicked()

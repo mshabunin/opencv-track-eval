@@ -70,12 +70,12 @@ QPair<QImage, QRectF> MainModel::getFrame() const
     return qMakePair(img.copy(), rect);
 }
 
-void MainModel::initTracking(const QRectF &rect)
+void MainModel::initTrackingCSRT(const QRectF &rect, const cv::tracking::TrackerCSRT::Params &params)
 {
     if (impl->tracker)
     {
         impl->tracker.release();
     }
-    impl->tracker = cv::tracking::TrackerCSRT::create();
+    impl->tracker = cv::tracking::TrackerCSRT::create(params);
     impl->tracker->init(impl->frame, cv::Rect(rect.x(), rect.y(),rect.width(), rect.height()));
 }

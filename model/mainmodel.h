@@ -3,6 +3,7 @@
 
 #include <QImage>
 #include <string>
+#include <opencv2/tracking.hpp>
 
 class MainModel
 {
@@ -13,7 +14,7 @@ public:
     bool seek(int num);
     int frameNum() const;
     QPair<QImage, QRectF> getFrame() const;
-    void initTracking(const QRectF & rect);
+    void initTrackingCSRT(const QRectF & rect, const cv::tracking::TrackerCSRT::Params & params);
 private:
     struct MainModelImpl;
     MainModelImpl * impl;
